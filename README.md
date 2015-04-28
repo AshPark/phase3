@@ -5,5 +5,5 @@ How to run a file
 2.  insert the phase3.php file in GoatsGiggles
 3.  Open Xampp control panel
 4.  start Apache and MySQL
-4.  go to web browser
-4.  type localhost\GoatsGiggles\phase3.php
+5.  go to web browser
+6.  type localhost\GoatsGiggles\phase3.php
