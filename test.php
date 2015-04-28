@@ -1,5 +1,5 @@
 <?php
-    $username="root";$password="1234";$database="hw3";
+    $username="root";$password="1234";$database="Goats";
 	#mysql_connect('localhost');
 	mysql_connect('localhost',$username,$password);
 	@mysql_select_db($database) or die( "Unable to select database");
