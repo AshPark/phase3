@@ -6,4 +6,4 @@ How to run a file
 3.  Open Xampp control panel
 4.  start Apache and MySQL
 5.  go to web browser
-6.  type localhost\GoatsGiggles\phase3.php
+6.  type localhost/GoatsGiggles/phase3.php
