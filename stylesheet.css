@@ -1,0 +1,30 @@
+body{
+    background-image: url("goat_bg.png");
+    text-align: right;
+	padding-right: 370px;
+}
+
+h1{
+	color: #000;
+	font-style: normal;
+	font-size: 70px;
+	font-family: Cambria;
+	text-align: right;
+	padding-top: 40px;
+	margin-right: -200px;
+}
+
+#search{
+	text-align: justify;
+	padding-top: 30px;
+	padding-left: 44px;
+	height: 180px;
+	width: 400px;
+	background-color: #fff;
+	position: fixed;
+	top: 200px;
+	right: 180px;
+	border-radius: 5px;
+	border-left-style: inset;
+	border-left-width: 5px;
+}
