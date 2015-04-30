@@ -1,15 +1,18 @@
 body{
     background-image: url("goat_bg.png");
-    text-align: right;
-	padding-right: 370px;
+    text-align: left;
+    padding-top: 40px;
+    padding-left: 40px;
 }
-
+div.text {
+	background-color: grey;
+}
 h1{
-	color: #000;
+	color: #CC9900;
 	font-style: normal;
-	font-size: 70px;
+	font-size: 40px;
 	font-family: Cambria;
-	text-align: right;
+	text-align: left;
 	padding-top: 40px;
 	margin-right: -200px;
 }
