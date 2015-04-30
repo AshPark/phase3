@@ -27,7 +27,10 @@
 	mysql_close();
 ?>
 
-
+<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+<div id="search">
 <p>
 What kind of pet are you looking for?
 <select name="Type">
@@ -45,6 +48,6 @@ This is my box
   <input type="text" name="subject" id="subject" value="">
 </form>
 <?php echo $_GET['subject']; ?>
-
+</div>
 </body>
 </html>
