@@ -1,7 +1,11 @@
 <html>
 <body>
 
-<form action="goat1.php" method="get">
+
+
+
+
+<form action="goats1.php" method="get">
 What type of pet are you looking for: <select name="type">
   <option value="">Select...</option>
   <option value="Mammal">Mammal</option>
@@ -12,7 +16,7 @@ What type of pet are you looking for: <select name="type">
 <input type="submit">
 </form>
 
-<form action="goat1.php" method="get">
+<form action="goats1.php" method="get">
 Enter the ID# of the toy:<br><input type="text" name="tid" id="tid" value=""><br>
 <input type="radio" name="option"
 <?php if (isset($option) && $option=="price") echo "checked";?>
@@ -34,7 +38,7 @@ value="supplier">Find supplier<br>
 <br>
 </form>
 
-<form action="goat1.php" method="get">
+<form action="goats1.php" method="get">
 Enter the ID# of the food:<br><input type="text" name="fid" id="fid" value=""><br>
 <input type="radio" name="option1"
 <?php if (isset($option1) && $option1=="price") echo "checked";?>
@@ -56,7 +60,7 @@ value="supplier">Find supplier<br>
 <br>
 </form>
 
-<form action="goat1.php" method="get">
+<form action="goats1.php" method="get">
 Enter the ID# of the pet:<br><input type="text" name="pid" id="pid" value=""><br>
 <input type="radio" name="option2"
 <?php if (isset($option2) && $option2=="price") echo "checked";?>
@@ -82,7 +86,7 @@ value="sell">Sell<br>
 <input type="submit">
 </form>
 
-<form action="goat1.php" method="get">
+<form action="goats1.php" method="get">
 Find pets without these allergens:<br><input type="text" name="alg" id="alg" value=""><br>
 <input type="submit">
 </form>
@@ -97,6 +101,11 @@ Find pets without these allergens:<br><input type="text" name="alg" id="alg" val
 
 <form action="AddPet.php">
 	<button>Add a new pet</button>
+</form>
+
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+Enter the allergen you would like to avoid: <br> <input type="text" name="allergen" id="allergen" value = ""><br>
+<input type="submit">
 </form>
 
 </body>
