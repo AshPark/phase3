@@ -144,7 +144,9 @@
 		}
 		else if($_GET['option2']=="sell")
 		{
-			echo "The sell a pet function goes here.";
+			$PID = $_GET['pid'];
+			if(mysql_query("DELETE FROM pet WHERE pid='$PID'"))
+				echo "$PID had been adopted!";	
 		}
 	}
 	if( isset($_GET['alg']))
