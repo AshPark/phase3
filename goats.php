@@ -1,8 +1,23 @@
 <html>
 <body>
 
+<!----------Whenever submitted by POST this will run to "clean" the data------>
+<?php
+// define variables and set to empty values
+$allergen="";
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+     $allergen = test_input($_POST["allergen"]);
+}
 
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
+?>
+<!---------End text cleaning function------------------------>
 
 
 <form action="goats1.php" method="get">
@@ -103,10 +118,15 @@ Find pets without these allergens:<br><input type="text" name="alg" id="alg" val
 	<button>Add a new pet</button>
 </form>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+<!---------------Aaron's Stuff-------------------->
+<form id="CompareByAlergen" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#CompareByAlergen" method="POST">
 Enter the allergen you would like to avoid: <br> <input type="text" name="allergen" id="allergen" value = ""><br>
 <input type="submit">
 </form>
+<?php
+echo "You would like to avoid: $allergen"; 
+?>
+<!--------------End Aaron's Functions------------->
 
 </body>
 </html>
