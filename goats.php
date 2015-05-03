@@ -1,21 +1,52 @@
 <html>
 <body>
 
+<!-----Variable Declaration---------->
+<?php
+$allergen="";
+$allergen_error="";
+$allergen_pets = array();
+?>
+<!-----End Variable Declaration------->
+
+
+
 <!----------Whenever submitted by POST this will run to "clean" the data------>
 <?php
-// define variables and set to empty values
-$allergen="";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-     $allergen = test_input($_POST["allergen"]);
+    
+    //Cleaner function for CompareByAllergen
+    if(empty($_POST["allergen"]))
+    {
+		$allergen_error = "You must enter an allergen";
+	}
+	else
+	{
+		$allergen = test_input($_POST["allergen"]);
+		if($allergen != "Dander" && $allergen != "Dandruff")
+		{
+			$allergen_error = "The allergen must be dander or dandruff";
+			$allergen = "";
+		}
+	}
+	//End Cleaner Function for CompareByAllergen
+	
 }
 
-function test_input($data) {
-   $data = trim($data);
-   $data = stripslashes($data);
-   $data = htmlspecialchars($data);
-   return $data;
+//Sub Function of Cleaner Function
+//Converts all input to harmless lowercase output with first letter capitalized
+function test_input($data) 
+{
+	$data = strtolower($data);
+	$data = ucfirst($data);
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
 }
+
+
 ?>
 <!---------End text cleaning function------------------------>
 
@@ -119,13 +150,59 @@ Find pets without these allergens:<br><input type="text" name="alg" id="alg" val
 </form>
 
 <!---------------Aaron's Stuff-------------------->
-<form id="CompareByAlergen" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#CompareByAlergen" method="POST">
-Enter the allergen you would like to avoid: <br> <input type="text" name="allergen" id="allergen" value = ""><br>
+
+<!----Function 2: Compare Pets By Allergen------>
+<div id="Function2" style= "border: 2px solid black; display:table; padding: 10px;">
+
+<!----Error message if input is empty---->
+<div id="Function2Error" style ="color:red; font-style:italic;">
+<?php
+echo "$allergen_error";
+?>
+</div>
+<!---End Error Message------>
+
+<form id="CompareByAllergen" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#CompareByAllergen" method="POST">
+Enter the allergen you would like to avoid <br> <input type="text" name="allergen" id="allergen" value = ""><br>
 <input type="submit">
 </form>
+
 <?php
-echo "You would like to avoid: $allergen"; 
+if($allergen_error == "" && $allergen != "")
+{
+	//Connect to Database
+	$username="root";$password="1234";$database="hw3";
+	#mysql_connect('localhost');
+	mysql_connect('localhost',$username,$password);
+	@mysql_select_db($database) or die( "Unable to select database");
+
+	$query = "SELECT Pet.PID 
+			  FROM Pet, Pet_Allergens 
+			  WHERE Pet.PID = Pet_Allergens.PID AND Pet_Allergens.Allergen = '$allergen'";
+
+	$result = mysql_query($query) or die(mysql_error());
+	echo "Pets without $allergen<br>"; 
+
+	echo "<table border='1'><tr>"; 
+	for($j=0;$j<$fields_num;$j++)
+	{
+		$field = mysql_fetch_field($result);
+		echo "<td>{$field->name}</td>";
+	}	
+	echo "</tr>\n";
+
+	while($row = mysql_fetch_row($result))
+	{
+		echo "<tr>";
+		foreach($row as $cell)
+			echo"<td>$cell</td>";
+	}
+}
+
 ?>
+</div>
+<!----End Function 2: Compare Pets By Allergen----->
+
 <!--------------End Aaron's Functions------------->
 
 </body>
