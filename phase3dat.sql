@@ -285,3 +285,5 @@ insert into Pet_Allergens values('DOG0000001', 'Dander');
 insert into Pet_Allergens values('CAT0000001', 'Dandruff');
 
 insert into Pet_Allergens values('BIRD000001', 'Dander');
+
+insert into Pet_Allergens values('BIRD000002', 'Dander');
