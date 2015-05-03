@@ -1,5 +1,5 @@
-create database Goats;
-use Goats;
+create database hw3;
+use hw3;
 
 create table Food(
   FID char(10) primary key,
