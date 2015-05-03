@@ -3,9 +3,9 @@
 
 <!-----Variable Declaration---------->
 <?php
-$allergen="";
-$allergen_error="";
-$allergen_pets = array();
+$F2Allergen="";
+$F2Allergen_error="";
+$F2Allergen_pets = array();
 ?>
 <!-----End Variable Declaration------->
 
@@ -19,15 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //Cleaner function for CompareByAllergen
     if(empty($_POST["allergen"]))
     {
-		$allergen_error = "You must enter an allergen";
+		$F2Allergen_error = "You must enter an allergen";
 	}
 	else
 	{
-		$allergen = test_input($_POST["allergen"]);
-		if($allergen != "Dander" && $allergen != "Dandruff")
+		$F2Allergen = test_input($_POST["allergen"]);
+		if($F2Allergen != "Dander" && $F2Allergen != "Dandruff")
 		{
-			$allergen_error = "The allergen must be dander or dandruff";
-			$allergen = "";
+			$F2Allergen_error = "The allergen must be dander or dandruff";
+			$F2Allergen = "";
 		}
 	}
 	//End Cleaner Function for CompareByAllergen
@@ -157,7 +157,7 @@ Find pets without these allergens:<br><input type="text" name="alg" id="alg" val
 <!----Error message if input is empty---->
 <div id="Function2Error" style ="color:red; font-style:italic;">
 <?php
-echo "$allergen_error";
+echo "$F2Allergen_error";
 ?>
 </div>
 <!---End Error Message------>
@@ -168,7 +168,7 @@ Enter the allergen you would like to avoid <br> <input type="text" name="allerge
 </form>
 
 <?php
-if($allergen_error == "" && $allergen != "")
+if($F2Allergen_error == "" && $F2Allergen != "")
 {
 	//Connect to Database
 	$username="root";$password="1234";$database="hw3";
@@ -178,10 +178,10 @@ if($allergen_error == "" && $allergen != "")
 
 	$query = "SELECT Pet.PID 
 			  FROM Pet, Pet_Allergens 
-			  WHERE Pet.PID = Pet_Allergens.PID AND Pet_Allergens.Allergen = '$allergen'";
+			  WHERE Pet.PID = Pet_Allergens.PID AND Pet_Allergens.Allergen = '$F2Allergen'";
 
 	$result = mysql_query($query) or die(mysql_error());
-	echo "Pets without $allergen<br>"; 
+	echo "Pets without $F2Allergen<br>"; 
 
 	echo "<table border='1'><tr>"; 
 	for($j=0;$j<$fields_num;$j++)
