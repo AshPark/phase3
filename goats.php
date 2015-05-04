@@ -194,12 +194,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		$F13ID = test_ID($_POST["F13ID"]);
 		$F13Price = test_Supplier_Name($_POST["F13Price"]);
 		$F13Lifetime = test_Supplier_Name($_POST["F13Lifetime"]);
-		$F13Allergens = test_text($_POST["F13Allergen"]);
-		if($F13Allergens != "Dander" && $F13Allergens != "Dandruff")
+		$F13Allergens = test_text($_POST["F13Allergens"]);
+		if($F13Allergens != "Dander" && $F13Allergens != "Dandruff" && $F13Allergens != "")
 		{
 			$F13Allergens_error = "The allergen must be dander or dandruff";
 			$F13Allergens = "";
 		}
+		mysql_connect('localhost',$username,$password);
+		@mysql_select_db($database) or die( "Unable to select database");
 		$F13Query = "SELECT Pet.PID
 						FROM Pet
 						WHERE Pet.PID = '$F13ID'";
@@ -359,7 +361,7 @@ echo "$F2Allergen_error";
 </div>
 <!---End Error Message------>
 
-<form id="CompareByAllergen" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#CompareByAllergen" method="POST">
+<form id="CompareByAllergen" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
 Enter the allergen you would like to avoid(Dander or Dandruff) <br> <input type="text" name="F2allergen" id="F2allergen" value = ""><br>
 <input type="submit">
 </form>
@@ -425,7 +427,7 @@ echo "$F4PID_error";
 </div>
 <!---End Error Message------>
 
-<form id="FindFavoriteToy" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#FindFavoriteToy" method="POST">
+<form id="FindFavoriteToy" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
 Enter the Pet's ID Number to see its favorite toys <br> <input type="text" name="F4PID" id="F4PID" value = ""><br>
 <input type="submit">
 </form>
@@ -493,7 +495,7 @@ echo "$F8ID_error";
 </div>
 <!---End Error Message------>
 
-<form id="FindPrice" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#FindPrice" method="POST">
+<form id="FindPrice" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
 Enter an ID number to see the items price <br> <input type="text" name="F8ID" id="F8ID" value = ""><br>
 <input type="submit">
 </form>
@@ -612,7 +614,7 @@ echo "$F13Price_error";
 </div>
 <!---End Error Message------>
 
-<form id="AddNewPet" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#AddNewPet" method="POST">
+<form id="AddNewPet" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
 Enter the NewID Number <input type="text" maxlength="10" name="F13ID" id="F13ID" value = ""><br>
 Enter the pets Price $<input type="number" min="0" step="0.01" name="F13Price" id="F13Price" value = ""><br>
 Enter the pets Lifetime(years) <input type="number" min="0" step="0.25" name="F13Lifetime" id="F13Lifetime" value = ""><br>
@@ -628,11 +630,14 @@ if($F13ID_error == "" && $F13Price_error == "" && $F13Lifetime_error == "" && $F
 
 	$F13Query = "INSERT into Pet 
 				Values ('$F13ID','$F13Price', '$F13Lifetime')";
-	$F13Query2 = "INSERT into Pet_Allergens
-				Values ('$F13ID', '$F13Allergens')";
-
 	$F13Result = mysql_query($F13Query) or die(mysql_error());
-	$F13Result2 = mysql_query($F13Query2) or die(mysql_error());
+
+	if($F13Allergens != "")
+	{
+		$F13Query2 = "INSERT into Pet_Allergens
+				Values ('$F13ID', '$F13Allergens')";
+		$F13Result2 = mysql_query($F13Query2) or die(mysql_error());
+	}	
 }
 
 ?>
@@ -660,7 +665,7 @@ echo "$F12Supplier_Name_error";
 
 
 
-<form id="StockShelves" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#StockShelves2" method="POST">
+<form id="StockShelves" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
 Enter the Suppliers Name <br> <input type="text" name="F12Supplier_Name" id="F12Supplier_Name" value = ""><br>
 <input type="submit">
 </form>
