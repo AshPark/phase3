@@ -230,6 +230,10 @@ Find pets without these allergens:<br><input type="text" name="alg" id="alg" val
 	<button>Add a new pet</button>
 </form>
 
+<form action="CountPets.php">
+	<button>Count Pets</button>
+</form>
+
 <!---------------Aaron's Stuff-------------------->
 
 <!----Function 2: Compare Pets By Allergen------>
