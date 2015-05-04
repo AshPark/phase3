@@ -12,6 +12,8 @@ $F2Allergen_pets = array();
 $F4PID = "";
 $F4PID_error="";
 $F4PID_toys=array();
+$F8ID="";
+$F8ID_error="";
 ?>
 <!-----End Variable Declaration------->
 
@@ -20,7 +22,8 @@ $F4PID_toys=array();
 <!----------Whenever submitted by POST this will run to "clean" the data------>
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{
     
     //Cleaner function for CompareByAllergen
     if(empty($_POST["F2allergen"]))
@@ -61,7 +64,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 	}
 	//End Cleaner Function for FindFavoriteToy
+
+	//Cleaner function for FindPrice
+    if(empty($_POST["F8ID"]))
+    {
+		//$F8ID_error = "You must enter an ID";
+	}
+	else
+	{
+		$F8ID = test_ID($_POST["F8ID"]);
+		mysql_connect('localhost',$username,$password);
+		@mysql_select_db($database) or die( "Unable to select database");
+
+		$F8Query = "SELECT Pet.PID
+			FROM Pet
+			WHERE Pet.PID = '$F8ID'";
+		$F8Result = mysql_query($F8Query) or die(mysql_error());
+		if(mysql_num_rows($F8Result) == 0)
+		{
+			$F8Query = "SELECT Toy.TID
+				FROM Toy
+				WHERE Toy.TID = '$F8ID'";
+			$F8Result = mysql_query($F8Query) or die(mysql_error());
+			if(mysql_num_rows($F8Result) == 0)
+			{
+				$F8Query = "SELECT Food.FID
+					FROM Food
+					WHERE Food.FID = '$F8ID'";
+
+				$F8Result = mysql_query($F8Query) or die(mysql_error());
+				if(mysql_num_rows($F8Result) == 0)
+				{
+					$F8ID_error = "There is no product with ID = $F8ID";
+					$F8ID = "";
+				}
+
+			}	
+	//End Cleaner Function for FindPrice
 	
+		}
+	}
 }
 
 //Sub Function of text cleaner function
@@ -222,19 +264,19 @@ if($F2Allergen_error == "" && $F2Allergen != "")
 	echo "<table border='1'><tr>"; 
 	echo "<td>PID</td>";
 	echo "<td>Price</td>";
-	for($j=0;$j<$F2Fields_num;$j++)
+	for($F2j=0;$j<$F2Fields_num;$F2j++)
 	{
 		$F2Field = mysql_fetch_field($F2Result);
 		echo "<td>{$F2Field->name}</td>";
 	}	
 	echo "</tr>\n";
-	$counter = 1;
+	$F2counter = 1;
 	while($F2Row = mysql_fetch_row($F2Result))
 	{
 		echo "<tr>";
 		foreach($F2Row as $F2Cell)
 		{
-			if($counter%2)
+			if($F2counter%2)
 			{
 				echo"<td>$F2Cell</td>";
 			}
@@ -242,7 +284,7 @@ if($F2Allergen_error == "" && $F2Allergen != "")
 			{
 				echo"<td>$$F2Cell</td>";
 			}
-			$counter=$counter+1;
+			$F2counter=$F2counter+1;
 		}
 		echo"</tr>";
 	}
@@ -276,7 +318,7 @@ if($F4PID_error == "" && $F4PID != "")
 	mysql_connect('localhost',$username,$password);
 	@mysql_select_db($database) or die( "Unable to select database");
 
-	$F4Query = "SELECT Toy.TID, Toy.Name, Toy.Price, Toy.Quantity
+	$F4Query = "SELECT Toy.TID, Toy.Name, Toy.Quantity, Toy.Price
 			  FROM PlaysWith, Toy 
 			  WHERE PlaysWith.TID = Toy.TID AND PlaysWith.PID = '$F4PID'";
 
@@ -288,20 +330,20 @@ if($F4PID_error == "" && $F4PID != "")
 	echo "<td>Name</td>";
 	echo "<td>Quantity</td>";
 	echo "<td>Price</td>";
-	for($j=0;$j<$F4Fields_num;$j++)
+	for($F4j=0;$j<$F4Fields_num;$F4j++)
 	{
 		$F4Field = mysql_fetch_field($F4Result);
 		echo "<td>{$F4Field->name}</td>";
 	}	
 	echo "</tr>\n";
 
-	$counter = 1;
+	$F4counter = 1;
 	while($F4Row = mysql_fetch_row($F4Result))
 	{
 		echo "<tr>";
 		foreach($F4Row as $F4Cell)
 		{
-			if($counter%4==0)
+			if($F4counter%4==0)
 			{
 				echo"<td>$$F4Cell</td>";
 			}
@@ -309,15 +351,130 @@ if($F4PID_error == "" && $F4PID != "")
 			{
 				echo"<td>$F4Cell</td>";
 			}
-			$counter=$counter+1;
+			$F4counter=$F4counter+1;
 		}
 		echo"</tr>";
 	}
+	echo"</table>";
 }
 
 ?>
 </div>
 <!----End Function 4: Compare Pets By Allergen----->
+
+<!----Function 8: Find Price------>
+<div id="Function8" style= "border-top: 2px solid black; display:table; padding: 10px;">
+
+<!----Error message if input is empty---->
+<div id="Function8Error" style ="color:red; font-style:italic;">
+<?php
+echo "$F8ID_error";
+?>
+</div>
+<!---End Error Message------>
+
+<form id="FindPrice" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#FindPrice" method="POST">
+Enter an ID number to see the items price <br> <input type="text" name="F8ID" id="F8ID" value = ""><br>
+<input type="submit">
+</form>
+
+<?php
+if($F8ID_error == "" && $F8ID != "")
+{
+	mysql_connect('localhost',$username,$password);
+	@mysql_select_db($database) or die( "Unable to select database");
+
+	$F8Query = "SELECT Pet.PID
+		FROM Pet
+		WHERE Pet.PID = '$F8ID'";
+	$F8Result = mysql_query($F8Query) or die(mysql_error());
+	if(mysql_num_rows($F8Result) == 0)
+	{
+		$F8Query = "SELECT Toy.TID
+			FROM Toy
+			WHERE Toy.TID = '$F8ID'";
+		$F8Result = mysql_query($F8Query) or die(mysql_error());
+		if(mysql_num_rows($F8Result) == 0)
+		{
+			$F8Query = "SELECT Food.FID
+				FROM Food
+				WHERE Food.FID = '$F8ID'";
+
+			$F8Result = mysql_query($F8Query) or die(mysql_error());
+			if(mysql_num_rows($F8Result) == 0)
+			{
+
+			}
+			else
+			{
+				$F8Query = "SELECT Food.FID, Food.Name, Food.Price
+					FROM Food 
+					WHERE Food.FID = '$F8ID'";
+				$F8Result = mysql_query($F8Query) or die(mysql_error());
+				echo "$F8ID<br>"; 
+				echo "<table border='1'><tr>"; 
+				echo "<td>ID</td>";
+				echo "<td>Name</td>";
+				echo "<td>Price</td>";
+			}
+		}
+		else
+		{
+			$F8Query = "SELECT Toy.TID, Toy.Name, Toy.Price
+				FROM Toy 
+				WHERE Toy.TID = '$F8ID'";
+			$F8Result = mysql_query($F8Query) or die(mysql_error());
+			echo "$F8ID<br>"; 
+			echo "<table border='1'><tr>"; 
+			echo "<td>ID</td>";
+			echo "<td>Name</td>";
+			echo "<td>Price</td>";
+		}
+	}
+	else
+	{
+		$F8Query = "SELECT Pet.PID, Pet.Price
+			FROM Pet 
+			WHERE Pet.PID = '$F8ID'";
+		$F8Result = mysql_query($F8Query) or die(mysql_error());
+		echo "$F8ID<br>"; 
+		echo "<table border='1'><tr>"; 
+		echo "<td>ID</td>";
+		echo "<td>Price</td>";
+	}
+
+
+	for($F8j=0;$F8j<$F8Fields_num;$F8j++)
+	{
+		$F8Field = mysql_fetch_field($F8Result);
+		echo "<td>{$F8Field->name}</td>";
+	}	
+	echo "</tr>\n";
+
+	$F8counter = 1;
+	while($F8Row = mysql_fetch_row($F8Result))
+	{
+		echo "<tr>";
+		foreach($F8Row as $F8Cell)
+		{
+			if($F8counter%4==0)
+			{
+				echo"<td>$$F8Cell</td>";
+			}
+			else
+			{
+				echo"<td>$F8Cell</td>";
+			}
+			$F8counter=$F8counter+1;
+		}
+		echo"</tr>";
+	}
+	echo"</table>";
+}
+
+?>
+</div>
+<!----End Function 8: FindPrice----->
 
 <!--------------End Aaron's Functions------------->
 
