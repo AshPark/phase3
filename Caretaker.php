@@ -25,8 +25,8 @@ Work Phone # (without spaces): <input type = "text" name = "WorkPhone" id ="Work
 	$HomePhone = $_POST['HomePhone'];
 	$WorkPhone = $_POST['WorkPhone'];
 
-	$sql = "INSERT INTO `caretaker`(`PID`, `Name`, `WeeklyHrs`, `HomePhone`, `WorkPhone`)
-       		VALUES('$PID','$Name',$WeeklyHrs, $HomePhone, $WorkPhone)";
+	$sql = "INSERT INTO `hw3`.`caretaker`(`PID`, `Name`, `WeeklyHrs`, `HomePhone`, `WorkPhone`)
+       		VALUES('$PID','$Name',$WeeklyHrs, $HomePhone, $WorkPhone);";
 
 	mysql_close();
 
