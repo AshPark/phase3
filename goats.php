@@ -29,6 +29,8 @@ $F13ID_error = "";
 $F13Lifetime_error = "";
 $F13Allergens_error = "";
 $F13Price_error = "";
+
+error_reporting( error_reporting() & ~E_NOTICE );
 ?>
 <!-----End Variable Declaration------->
 
