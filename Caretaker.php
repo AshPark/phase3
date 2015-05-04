@@ -28,6 +28,7 @@ Work Phone # (without spaces): <input type = "text" name = "WorkPhone" id ="Work
 	$sql = "INSERT INTO `hw3`.`caretaker`(`PID`, `Name`, `WeeklyHrs`, `HomePhone`, `WorkPhone`)
        		VALUES('$PID','$Name',$WeeklyHrs, $HomePhone, $WorkPhone);";
 
+	mysql_query($sql);
 	mysql_close();
 
 ?>
