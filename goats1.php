@@ -41,7 +41,57 @@
 		}
 		else if($_GET['option']=="sell")
 		{
-			echo "The sell a toy function goes here.";
+			$TID = $_GET['tid'];
+			$sellToyquery = "SELECT TID, Quantity, Name, Price
+						FROM `Toy`
+						WHERE TID = '$TID';"; 
+			$currentQuantity = "SELECT Quantity
+								FROM `Toy`
+								WHERE TID = '$TID';";
+
+			$sellToyresult = mysql_query($sellToyquery);
+
+			echo "<table border = '1'><tr>";
+			echo "<td> Toy ID</td>";
+			echo "<td>Quantity</td>";
+			echo "<td>Name</td>";
+			echo "<td>Price</td>";
+
+    		while($F7rows = mysql_fetch_row($sellToyresult))
+    		{
+    			echo "<tr>";
+    			foreach($F7rows as $F7Cell)
+    					echo"<td>$F7Cell</td>";
+    			echo "</tr>";
+    		}
+   
+    		echo"</table> <br>";
+
+    		echo'<form name = "changePrice" action="" method="post">
+					Quantity to be sold: <input type="text" name="Quantity" id="Quantity"><br>
+					<input type="submit" name = "changeQuantity" id = "changeQuantity" value = "Submit">
+					</form>';
+			$Quantitysold = $_POST['Quantity'];
+			$Quantityresult = mysql_query($currentQuantity);
+			while($row = mysql_fetch_assoc($Quantityresult))
+			{
+				$quantityNumerical = $row['Quantity'];
+			}
+
+			if($Quantitysold > $quantityNumerical)
+				echo "Not enough in stock!";
+			else
+			{
+				$finalQuantity = $quantityNumerical - $Quantitysold;
+				$sellToy = "UPDATE `Toy`
+       						SET `Quantity` = '$finalQuantity'
+       						WHERE `TID` = '$TID'";
+
+       			mysql_query($sellToy);
+       			echo "Items sold! <br>";
+       			echo "New Quantity: $finalQuantity";
+			}
+
 		}
 		else if($_GET['option']=="quantity")
 		{
@@ -53,7 +103,7 @@
 
 			$sqlresult = "SELECT Name, Phone, Street, City, SuppState, Zip
     		 			  FROM `Supplier`, `SuppAddr`, `SuppToys`
-    					  WHERE TID = '$TID' AND `suppToys`.SuppName = `Supplier`.Name AND `suppToys`.SuppName = `SuppAddr`.SuppName ";
+    					  WHERE TID = '$TID' AND `SuppToys`.SuppName = `Supplier`.Name AND `SuppToys`.SuppName = `SuppAddr`.SuppName ";
 
     		$queryresult = mysql_query($sqlresult) or die(mysql_error());
 
