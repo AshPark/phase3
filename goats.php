@@ -226,6 +226,10 @@ Find pets without these allergens:<br><input type="text" name="alg" id="alg" val
 	<button>Hire A Caretaker</button>
 </form>
 
+<form action = "ChangePrice.php">
+	<button>Change Price of an Item</button>
+</form>
+
 <form action="AddPet.php">
 	<button>Add a new pet</button>
 </form>
