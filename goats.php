@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		{
 			if(empty($_POST["F12Supplier_Name"]) && !empty($_POST["F12Quantity"]) && !empty($_POST["F12ID"]))
 			{
-				$F12Supplier_Name = "PleaseNotYet";
+				//$F12Supplier_Name = "PleaseNotYet";
 				$F12ID = test_ID($_POST["F12ID"]);
 				$F12Quantity = test_ID($_POST["F12Quantity"]);
 				mysql_connect('localhost',$username,$password);
@@ -587,7 +587,7 @@ Enter the Suppliers Name <br> <input type="text" name="F12Supplier_Name" id="F12
 </form>
 <?php
 }
-else
+if($F12Supplier_Name_error == "")
 {
 	if($F12Supplier_Name_error == "" && $F12Supplier_Name != "")
 	{
@@ -650,7 +650,7 @@ else
 		}
 
 	}
-	if ($F12ID =="" ) 
+	if ($F12ID =="" && $F12Supplier_Name != "" ) 
 	{
 		?>
 		<br>
@@ -695,6 +695,10 @@ else
 					SET Quantity=Quantity+'$F12Quantity'
 					WHERE FID = '$F12ID'";
 				$F12Result = mysql_query($F12Query) or die(mysql_error());
+				$F12Supplier_Name = "";
+				$F12ID = "";
+				$F12Quantity = "0";
+				location.reload();
 			}
 		}
 		else
@@ -703,6 +707,10 @@ else
 				SET Quantity=Quantity+'$F12Quantity' 
 				WHERE TID = '$F12ID'";
 			$F12Result = mysql_query($F12Query) or die(mysql_error());
+			$F12Supplier_Name = "";
+			$F12ID = "";
+			$F12Quantity = "0";
+			location.reload();
 		}
 	}
 }	
