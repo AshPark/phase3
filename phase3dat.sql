@@ -234,15 +234,15 @@ insert into Eats values('SNAKE00001', 'FOOD000004');
 
 insert into Eats values('LIZARD0001', 'FOOD000004');
 
-insert into SuppFood values('Nom Nom Noms', 'FOOD00001');
+insert into SuppFood values('Nom Nom Noms', 'FOOD000001');
 
-insert into SuppFood values('Nom Nom Noms', 'FOOD00002');
+insert into SuppFood values('Nom Nom Noms', 'FOOD000002');
 
-insert into SuppFood values('Nom Nom Noms', 'FOOD00003');
+insert into SuppFood values('Nom Nom Noms', 'FOOD000003');
 
-insert into SuppFood values('Feed All The Pets', 'FOOD00004');
+insert into SuppFood values('Feed All The Pets', 'FOOD000004');
 
-insert into SuppFood values('Feed All The Pets', 'FOOD00005');
+insert into SuppFood values('Feed All The Pets', 'FOOD000005');
 
 insert into SuppPets values('Creatures R Us', 'DOG0000001');
 
@@ -250,7 +250,7 @@ insert into SuppPets values('Creatures R Us', 'CAT0000002');
 
 insert into SuppPets values('Creatures R Us', 'SNAKE00001');
 
-insert into SuppPets values('Creatures R Us', 'LIDARD0002');
+insert into SuppPets values('Creatures R Us', 'LIZARD0002');
 
 insert into SuppPets values('Supply All the Pets', 'FISH000001');
 
