@@ -1,6 +1,7 @@
 <html>
 <body>
 
+
 <!-----Variable Declaration---------->
 <?php
 //Connect to Database
@@ -14,6 +15,12 @@ $F4PID_error="";
 $F4PID_toys=array();
 $F8ID="";
 $F8ID_error="";
+$F12Supplier_Name="";
+$F12Supplier_Name_error="";
+$F12ID="";
+$F12ID_error="";
+$F12Quantity = 0;
+$F12Quantity_error="";
 ?>
 <!-----End Variable Declaration------->
 
@@ -100,10 +107,74 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				}
 
 			}	
-	//End Cleaner Function for FindPrice
-	
+		
 		}
 	}
+	//End Cleaner Function for FindPrice
+
+	//First Cleaner function for StockShelves
+    if(empty($_POST["F12Supplier_Name"]) && empty($_POST["F12ID"])&& empty($_POST["F12Quantity"]))
+    {
+		//$F12Supplier_Name_error = "You must enter a Supplier";
+		$F12Supplier_Name = "";
+		$F12ID = "";
+		$F12Quantity = "0";
+	}
+	else
+	{
+		if((!empty($_POST["F12Supplier_Name"]) )&& empty($_POST["F12ID"]) && empty($_POST["F12Quantity"]))
+		{
+			$F12Supplier_Name = test_Supplier_Name($_POST["F12Supplier_Name"]);
+			mysql_connect('localhost',$username,$password);
+			@mysql_select_db($database) or die( "Unable to select database");
+
+			$F12Query = "SELECT Supplier.Name
+				FROM Supplier
+				WHERE Supplier.Name = '$F12Supplier_Name'";
+
+			$F12Result = mysql_query($F12Query) or die(mysql_error());
+			if(mysql_num_rows($F12Result) == 0)
+			{
+				$F12Supplier_Name_error = "There is no Supplier named $F12Supplier_Name";
+			 	$F12Supplier_Name = "";
+			}
+		}
+		else
+		{
+			if(empty($_POST["F12Supplier_Name"]) && !empty($_POST["F12Quantity"]) && !empty($_POST["F12ID"]))
+			{
+				$F12Supplier_Name = "PleaseNotYet";
+				$F12ID = test_ID($_POST["F12ID"]);
+				$F12Quantity = test_ID($_POST["F12Quantity"]);
+				mysql_connect('localhost',$username,$password);
+				@mysql_select_db($database) or die( "Unable to select database");
+
+				$F12Query = "SELECT Toy.TID
+					FROM Toy
+					WHERE Toy.TID = '$F12ID'";
+				$F12Result = mysql_query($F12Query) or die(mysql_error());
+				if(mysql_num_rows($F12Result) == 0)
+				{
+					$F12Query = "SELECT Food.FID
+						FROM Food
+						WHERE Food.FID = '$F12ID'";
+
+					$F12Result = mysql_query($F12Query) or die(mysql_error());
+					if(mysql_num_rows($F12Result) == 0)
+					{
+						$F12ID_error = "There is no product with ID = $F12ID";
+						$F12ID = "";
+					}
+				}	
+			}
+			else
+			{
+				$F12Supplier_Name = test_Supplier_Name($_POST["F12Supplier_Name_catch"]);
+				$F12ID_error = "Please enter both an ID and a Quantity";
+			}
+		}
+	}
+	//End First Cleaner Function for FindFavoriteToy
 }
 
 //Sub Function of text cleaner function
@@ -112,6 +183,14 @@ function test_text($data)
 {
 	$data = strtolower($data);
 	$data = ucfirst($data);
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
+function test_Supplier_Name($data) 
+{
 	$data = trim($data);
 	$data = stripslashes($data);
 	$data = htmlspecialchars($data);
@@ -244,7 +323,7 @@ echo "$F2Allergen_error";
 <!---End Error Message------>
 
 <form id="CompareByAllergen" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#CompareByAllergen" method="POST">
-Enter the allergen you would like to avoid <br> <input type="text" name="F2allergen" id="F2allergen" value = ""><br>
+Enter the allergen you would like to avoid(Dander/Dandruff) <br> <input type="text" name="F2allergen" id="F2allergen" value = ""><br>
 <input type="submit">
 </form>
 
@@ -308,7 +387,7 @@ echo "$F4PID_error";
 <!---End Error Message------>
 
 <form id="FindFavoriteToy" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#FindFavoriteToy" method="POST">
-Enter the Pet's ID Number to see his favorite toys <br> <input type="text" name="F4PID" id="F4PID" value = ""><br>
+Enter the Pet's ID Number to see its favorite toys <br> <input type="text" name="F4PID" id="F4PID" value = ""><br>
 <input type="submit">
 </form>
 
@@ -330,7 +409,7 @@ if($F4PID_error == "" && $F4PID != "")
 	echo "<td>Name</td>";
 	echo "<td>Quantity</td>";
 	echo "<td>Price</td>";
-	for($F4j=0;$j<$F4Fields_num;$F4j++)
+	for($F4j=0;$F4j<$F4Fields_num;$F4j++)
 	{
 		$F4Field = mysql_fetch_field($F4Result);
 		echo "<td>{$F4Field->name}</td>";
@@ -475,6 +554,155 @@ if($F8ID_error == "" && $F8ID != "")
 ?>
 </div>
 <!----End Function 8: FindPrice----->
+
+<!----Function 12: StockShelves------>
+
+<div id="Function12" style= "border-top: 2px solid black; display:table; padding: 10px;">
+<?php
+    if ($F12Supplier_Name =="" ) {
+?>
+
+
+<!----Error message if input is empty---->
+<div id="Function12Error" style ="color:red; font-style:italic;">
+<?php
+echo "$F12Supplier_Name_error";
+?>
+</div>
+<!---End Error Message------>
+
+
+
+<form id="StockShelves" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#StockShelves2" method="POST">
+Enter the Suppliers Name <br> <input type="text" name="F12Supplier_Name" id="F12Supplier_Name" value = ""><br>
+<input type="submit">
+</form>
+<?php
+}
+else
+{
+	if($F12Supplier_Name_error == "" && $F12Supplier_Name != "")
+	{
+
+		mysql_connect('localhost',$username,$password);
+		@mysql_select_db($database) or die( "Unable to select database");
+
+		$F12Query = "SELECT SuppToys.TID
+			FROM SuppToys
+			WHERE SuppToys.SuppName = '$F12Supplier_Name'";
+		$F12Result = mysql_query($F12Query) or die(mysql_error());
+		if(mysql_num_rows($F12Result) != 0)
+		{
+			echo "Products from: $F12Supplier_Name <br>"; 
+			echo "<table border='1'><tr>"; 
+			echo "<td>TID</td>";
+			for($F12j=0;$F12j<$F12Fields_num;$F12j++)
+			{
+				$F12Field = mysql_fetch_field($F12Result);
+				echo "<td>{$F12Field->name}</td>";
+			}	
+			echo "</tr>\n";
+			while($F12Row = mysql_fetch_row($F12Result))
+			{
+				echo "<tr>";
+				foreach($F12Row as $F12Cell)
+				{
+						echo"<td>$F12Cell</td>";
+				}
+				echo"</tr>";
+			}
+			echo"</table>";
+		}
+
+		$F12Query = "SELECT SuppFood.FID
+			FROM SuppFood
+			WHERE SuppFood.SuppName = '$F12Supplier_Name'";
+		$F12Result = mysql_query($F12Query) or die(mysql_error());
+		if(mysql_num_rows($F12Result) != 0)
+		{
+			echo "Products from: $F12Supplier_Name <br>"; 
+			echo "<table border='1'><tr>"; 
+			echo "<td>FID</td>";
+			for($F12j=0;$F12j<$F12Fields_num;$F12j++)
+			{
+				$F12Field = mysql_fetch_field($F12Result);
+				echo "<td>{$F12Field->name}</td>";
+			}	
+			echo "</tr>\n";
+			while($F12Row = mysql_fetch_row($F12Result))
+			{
+				echo "<tr>";
+				foreach($F12Row as $F12Cell)
+				{
+						echo"<td>$F12Cell</td>";
+				}
+				echo"</tr>";
+			}
+			echo"</table>";
+		}
+
+	}
+	if ($F12ID =="" ) 
+	{
+		?>
+		<br>
+		<div id="Function12Error" style ="color:red; font-style:italic;">
+		<?php
+		echo "$F12ID_error";
+		?>
+		</div>
+		<form id="StockShelves2" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+		Enter the ID of the product and the amount you would like to add to stock <br> <input type="text" name="F12ID" id="F12ID" value = "">
+		<input type="number" name = "F12Quantity" id="F12Quantity" value = "">
+		<input type="hidden" name = "F12Supplier_Name_catch" id="F12Supplier_Name_catch" value ="<?php echo $F12Supplier_Name ?>">
+		<input type="submit">
+		</form>
+		<?php
+		
+	}
+	if($F12ID != "")
+	{
+		mysql_connect('localhost',$username,$password);
+		@mysql_select_db($database) or die( "Unable to select database");
+
+		$F12Query = "SELECT Toy.TID
+			FROM Toy
+			WHERE Toy.TID = '$F12ID'";
+		$F12Result = mysql_query($F12Query) or die(mysql_error());
+		if(mysql_num_rows($F12Result) == 0)
+		{
+
+			$F12Query = "SELECT Food.FID
+			FROM Food
+			WHERE Food.FID = '$F12ID'";
+
+			$F12Result = mysql_query($F12Query) or die(mysql_error());
+			if(mysql_num_rows($F12Result) == 0)
+			{
+
+			}
+			else
+			{
+				$F12Query = "UPDATE Food 
+					SET Quantity=Quantity+'$F12Quantity'
+					WHERE FID = '$F12ID'";
+				$F12Result = mysql_query($F12Query) or die(mysql_error());
+			}
+		}
+		else
+		{
+			$F12Query = "UPDATE Toy 
+				SET Quantity=Quantity+'$F12Quantity' 
+				WHERE TID = '$F12ID'";
+			$F12Result = mysql_query($F12Query) or die(mysql_error());
+		}
+	}
+}	
+?>
+</div>
+
+<!----End Function 12: StockShelves----->
+
 
 <!--------------End Aaron's Functions------------->
 
