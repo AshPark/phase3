@@ -49,7 +49,30 @@
 		}
 		else if($_GET['option']=="supplier")
 		{
-			echo "The find supplier of a toy function goes here.";
+			$TID = $_GET['tid'];
+
+			$sqlresult = "SELECT Name, Phone, Street, City, SuppState, Zip
+    		 			  FROM `Supplier`, `SuppAddr`, `SuppToys`
+    					  WHERE TID = '$TID' AND `suppToys`.SuppName = `Supplier`.Name AND `suppToys`.SuppName = `SuppAddr`.SuppName ";
+
+    		$queryresult = mysql_query($sqlresult) or die(mysql_error());
+
+    		echo "<table border = '1'><tr>";
+    		echo "<td>Name</td>";
+    		echo "<td>Phone Number</td>";
+    		echo "<td>Street</td>";
+    		echo "<td>City</td>";
+    		echo "<td>State</td>";
+    		echo "<td>Zip Code</td>";
+
+    		while($F7rows = mysql_fetch_row($queryresult))
+    		{
+    			echo "<tr>";
+    			foreach($F7rows as $F7Cell)
+    					echo"<td>$F7Cell</td>";
+    			echo "</tr>";
+    		}
+    		echo"</table>";
 		}
 	}
 	
@@ -73,7 +96,30 @@
 		}
 		else if($_GET['option1']=="supplier")
 		{
-			echo "The find supplier of a food function goes here.";
+			$FID = $_GET['fid'];
+
+			$sqlresult = "SELECT Name, Phone, Street, City, SuppState, Zip
+    		 			  FROM `Supplier`, `SuppAddr`, `SuppFood`
+    					  WHERE FID = '$FID' AND `suppFood`.SuppName = `Supplier`.Name AND `suppFood`.SuppName = `SuppAddr`.SuppName ";
+
+    		$queryresult = mysql_query($sqlresult) or die(mysql_error());
+
+    		echo "<table border = '1'><tr>";
+    		echo "<td>Name</td>";
+    		echo "<td>Phone Number</td>";
+    		echo "<td>Street</td>";
+    		echo "<td>City</td>";
+    		echo "<td>State</td>";
+    		echo "<td>Zip Code</td>";
+
+    		while($F7rows = mysql_fetch_row($queryresult))
+    		{
+    			echo "<tr>";
+    			foreach($F7rows as $F7Cell)
+    					echo"<td>$F7Cell</td>";
+    			echo "</tr>";
+    		}
+    		echo"</table>";
 		}
 	}
 	
@@ -136,8 +182,32 @@
 		}
 		else if($_GET['option2']=="supplier")
 		{
-			echo "The find supplier of pet function goes here";
+			$PID = $_GET['pid'];
+
+			$sqlresult = "SELECT Name, Phone, Street, City, SuppState, Zip
+    		 			  FROM `Supplier`, `SuppAddr`, `SuppPets`
+    					  WHERE PID = '$PID' AND `suppPets`.SuppName = `Supplier`.Name AND `suppPets`.SuppName = `SuppAddr`.SuppName ";
+
+    		$queryresult = mysql_query($sqlresult) or die(mysql_error());
+
+    		echo "<table border = '1'><tr>";
+    		echo "<td>Name</td>";
+    		echo "<td>Phone Number</td>";
+    		echo "<td>Street</td>";
+    		echo "<td>City</td>";
+    		echo "<td>State</td>";
+    		echo "<td>Zip Code</td>";
+
+    		while($F7rows = mysql_fetch_row($queryresult))
+    		{
+    			echo "<tr>";
+    			foreach($F7rows as $F7Cell)
+    					echo"<td>$F7Cell</td>";
+    			echo "</tr>";
+    		}
+    		echo"</table>";
 		}
+
 		else if($_GET['option2']=="priceFix")
 		{
 			echo "The change price of pet function goes here.";
