@@ -44,7 +44,7 @@
 
 <html>
 <body>
-<form action="tester7.php" method="get">
+<form action="badFood.php" method="get">
 Would you like to delete this food?:<br><input type="radio" name="accept"
 <?php if (isset($accept) && $accept=="yes") echo "checked";?>
 value="yes">Yes
