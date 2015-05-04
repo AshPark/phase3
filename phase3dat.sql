@@ -204,6 +204,8 @@ insert into PlaysWith values('CAT0000002', 'TOY0000008');
 
 insert into PlaysWith values('DOG0000001', 'TOY0000001');
 
+insert into PlaysWith values('DOG0000001', 'TOY0000008');
+
 insert into PlaysWith values('BIRD000001', 'TOY0000004');
 
 insert into PlaysWith values('BIRD000002', 'TOY0000005');
