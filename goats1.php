@@ -138,7 +138,57 @@
 		}
 		else if($_GET['option1']=="sell")
 		{
-			echo "The sell a food function goes here.";
+			$FID = $_GET['fid'];
+			$sellFoodquery = "SELECT FID, Quantity, Name, Price
+								FROM `Food`
+								WHERE FID = '$FID'"; 
+
+			$currentQuantity = "SELECT Quantity
+								FROM `Food`
+								WHERE FID = '$FID'";
+
+			$sellFoodresult = mysql_query($sellFoodquery);
+
+			echo "<table border = '1'><tr>";
+			echo "<td> Food ID</td>";
+			echo "<td>Quantity</td>";
+			echo "<td>Name</td>";
+			echo "<td>Price</td>";
+
+    		while($F10rows = mysql_fetch_row($sellFoodresult))
+    		{
+    			echo "<tr>";
+    			foreach($F10rows as $F10Cell)
+    					echo"<td>$F10Cell</td>";
+    			echo "</tr>";
+    		}
+    		echo"</table> <br>";
+
+    		echo'<form name = "changePrice" action="" method="post">
+					Quantity to be sold: <input type="text" name="Quantity" id="Quantity"><br>
+					<input type="submit" name = "changeQuantity" id = "changeQuantity" value = "Submit">
+					</form>';
+			$Quantitysold = $_POST['Quantity'];
+			$Quantityresult = mysql_query($currentQuantity);
+			while($row = mysql_fetch_assoc($Quantityresult))
+			{
+				$quantityNumerical = $row['Quantity'];
+			}
+
+			if($Quantitysold > $quantityNumerical)
+				echo "Not enough in stock!";
+			else
+			{
+				$finalQuantity = $quantityNumerical - $Quantitysold;
+				$sellToy = "UPDATE `Food`
+       						SET `Quantity` = '$finalQuantity'
+       						WHERE `FID` = '$FID'";
+
+       			mysql_query($sellToy);
+       			echo "Food sold! <br>";
+       			echo "New Quantity: $finalQuantity";
+			}
+
 		}
 		else if($_GET['option1']=="quantity")
 		{
