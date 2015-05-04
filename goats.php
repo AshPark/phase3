@@ -194,11 +194,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		$F13ID = test_ID($_POST["F13ID"]);
 		$F13Price = test_Supplier_Name($_POST["F13Price"]);
 		$F13Lifetime = test_Supplier_Name($_POST["F13Lifetime"]);
-		$F13Allergen = test_text($_POST["F13Allergen"]);
-		if($F13Allergen != "Dander" && $F13Allergen != "Dandruff")
+		$F13Allergens = test_text($_POST["F13Allergen"]);
+		if($F13Allergens != "Dander" && $F13Allergens != "Dandruff")
 		{
-			$F13Allergen_error = "The allergen must be dander or dandruff";
-			$F13Allergen = "";
+			$F13Allergens_error = "The allergen must be dander or dandruff";
+			$F13Allergens = "";
 		}
 		$F13Query = "SELECT Pet.PID
 						FROM Pet
