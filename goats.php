@@ -21,6 +21,14 @@ $F12ID="";
 $F12ID_error="";
 $F12Quantity = 0;
 $F12Quantity_error="";
+$F13ID = "";
+$F13Lifetime=0;
+$F13Allergens = "";
+$F13Price = 0.0;
+$F13ID_error = "";
+$F13Lifetime_error = "";
+$F13Allergens_error = "";
+$F13Price_error = "";
 ?>
 <!-----End Variable Declaration------->
 
@@ -112,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	}
 	//End Cleaner Function for FindPrice
 
-	//First Cleaner function for StockShelves
+	//Cleaner function for StockShelves
     if(empty($_POST["F12Supplier_Name"]) && empty($_POST["F12ID"])&& empty($_POST["F12Quantity"]))
     {
 		//$F12Supplier_Name_error = "You must enter a Supplier";
@@ -174,10 +182,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 			}
 		}
 	}
-	//End First Cleaner Function for FindFavoriteToy
+	//End Cleaner Function for StockShelves
+
+	//Cleaner function for AddNewPet
+    if(empty($_POST["F13ID"])||empty($_POST["F13Price"])||empty($_POST["F13Lifetime"]))
+    {
+		//$F12Supplier_Name_error = "You must enter a Supplier";
+	}
+	else
+	{
+		$F13ID = test_ID($_POST["F13ID"]);
+		$F13Price = test_Supplier_Name($_POST["F13Price"]);
+		$F13Lifetime = test_Supplier_Name($_POST["F13Lifetime"]);
+		$F13Allergen = test_text($_POST["F13Allergen"]);
+		if($F13Allergen != "Dander" && $F13Allergen != "Dandruff")
+		{
+			$F13Allergen_error = "The allergen must be dander or dandruff";
+			$F13Allergen = "";
+		}
+		$F13Query = "SELECT Pet.PID
+						FROM Pet
+						WHERE Pet.PID = '$F13ID'";
+		$F13Result = mysql_query($F13Query) or die(mysql_error());
+		if(mysql_num_rows($F12Result) != 0)
+		{
+			$F13ID_error = "There is already a pet with ID = $F13ID";
+			$F13ID = "";
+		}
+	}
+	//End Cleaner Function for AddNewPet
 }
 
-//Sub Function of text cleaner function
+//Sub Functions of text cleaner function
 //Converts all input to harmless lowercase output with first letter capitalized
 function test_text($data) 
 {
@@ -292,11 +328,6 @@ value="sell">Sell<br>
 <input type="submit">
 </form>
 
-<form action="goats1.php" method="get">
-Find pets without these allergens:<br><input type="text" name="alg" id="alg" value=""><br>
-<input type="submit">
-</form>
-
 <form action="badFood.php">
 	<button>Find Expired Food</button>
 </form>
@@ -309,10 +340,6 @@ Find pets without these allergens:<br><input type="text" name="alg" id="alg" val
 	<button>Change Price of an Item</button>
 </form>
 
-<form action="AddPet.php">
-	<button>Add a new pet</button>
-</form>
-
 <form action="CountPets.php">
 	<button>Count Pets</button>
 </form>
@@ -321,7 +348,9 @@ Find pets without these allergens:<br><input type="text" name="alg" id="alg" val
 
 <!----Function 2: Compare Pets By Allergen------>
 <div id="Function2" style= "border-top: 2px solid black; display:table; padding: 10px;">
-
+<h4>
+Compare Pets By Allergen
+</h4>
 <!----Error message if input is empty---->
 <div id="Function2Error" style ="color:red; font-style:italic;">
 <?php
@@ -331,7 +360,7 @@ echo "$F2Allergen_error";
 <!---End Error Message------>
 
 <form id="CompareByAllergen" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#CompareByAllergen" method="POST">
-Enter the allergen you would like to avoid(Dander/Dandruff) <br> <input type="text" name="F2allergen" id="F2allergen" value = ""><br>
+Enter the allergen you would like to avoid(Dander or Dandruff) <br> <input type="text" name="F2allergen" id="F2allergen" value = ""><br>
 <input type="submit">
 </form>
 
@@ -385,7 +414,9 @@ if($F2Allergen_error == "" && $F2Allergen != "")
 
 <!----Function 4: Find Favorite Toy------>
 <div id="Function4" style= "border-top: 2px solid black; display:table; padding: 10px;">
-
+<h4>
+Find A Pets Favorite Toy
+</h4>
 <!----Error message if input is empty---->
 <div id="Function4Error" style ="color:red; font-style:italic;">
 <?php
@@ -447,11 +478,13 @@ if($F4PID_error == "" && $F4PID != "")
 
 ?>
 </div>
-<!----End Function 4: Compare Pets By Allergen----->
+<!----End Function 4: Find Favorite Toy----->
 
 <!----Function 8: Find Price------>
 <div id="Function8" style= "border-top: 2px solid black; display:table; padding: 10px;">
-
+<h4>
+Find A Price
+</h4>
 <!----Error message if input is empty---->
 <div id="Function8Error" style ="color:red; font-style:italic;">
 <?php
@@ -563,9 +596,55 @@ if($F8ID_error == "" && $F8ID != "")
 </div>
 <!----End Function 8: FindPrice----->
 
+<!----Function 13: AddNewPet------>
+<div id="Function13" style= "border-top: 2px solid black; display:table; padding: 10px;">
+<h4>
+Add A New Pet
+</h4>
+<!----Error message if input is empty---->
+<div id="Function13Error" style ="color:red; font-style:italic;">
+<?php
+echo "$F13ID_error";
+echo "$F13Lifetime_error";
+echo "$F13Allergens_error";
+echo "$F13Price_error";
+?>
+</div>
+<!---End Error Message------>
+
+<form id="AddNewPet" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>#AddNewPet" method="POST">
+Enter the NewID Number <input type="text" maxlength="10" name="F13ID" id="F13ID" value = ""><br>
+Enter the pets Price $<input type="number" min="0" step="0.01" name="F13Price" id="F13Price" value = ""><br>
+Enter the pets Lifetime(years) <input type="number" min="0" step="0.25" name="F13Lifetime" id="F13Lifetime" value = ""><br>
+Enter the pets Allergens <input type="text" name="F13Allergens" id="F13Allergens" value = ""><br>
+<input type="submit">
+</form>
+
+<?php
+if($F13ID_error == "" && $F13Price_error == "" && $F13Lifetime_error == "" && $F13ID !="")
+{
+	mysql_connect('localhost',$username,$password);
+	@mysql_select_db($database) or die( "Unable to select database");
+
+	$F13Query = "INSERT into Pet 
+				Values ('$F13ID','$F13Price', '$F13Lifetime')";
+	$F13Query2 = "INSERT into Pet_Allergens
+				Values ('$F13ID', '$F13Allergens')";
+
+	$F13Result = mysql_query($F13Query) or die(mysql_error());
+	$F13Result2 = mysql_query($F13Query2) or die(mysql_error());
+}
+
+?>
+</div>
+<!----End Function 13: Compare Pets By Allergen----->
+
 <!----Function 12: StockShelves------>
 
 <div id="Function12" style= "border-top: 2px solid black; display:table; padding: 10px;">
+<h4>
+Add Stock To Inventory
+</h4>
 <?php
     if ($F12Supplier_Name =="" ) {
 ?>
