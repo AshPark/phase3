@@ -1,4 +1,8 @@
 <html>
+	<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<div id = "mainbackground"></div>
+</head>
 <body>
 <a href="goats.php">Back to Main Page</a><br><br>
 Tally of all pets currently in the database, sorted by type: <br><br>
