@@ -1,5 +1,5 @@
 
-Group 12 Project Phase 3
+Group 5 Project Phase 3
 README
 
 1. Open Xampp control panel
