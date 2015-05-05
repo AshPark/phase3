@@ -265,6 +265,22 @@ What type of pet are you looking for: <select name="type">
 <input type="submit">
 </form>
 
+<form action="badFood.php">
+	<button><strong>Find Expired Food</strong></button>
+</form>
+
+<form action="Caretaker.php">
+	<button><strong>Hire A Caretaker</strong></button>
+</form>
+
+<form action = "ChangePrice.php">
+	<button><strong>Change Price of an Item</strong></button>
+</form>
+
+<form action="CountPets.php">
+	<button><strong>Count Pets</strong></button>
+</form>
+
 <form action="goats1.php" method="get"style= "border-top: 2px solid black; display:table; padding: 10px;">
 <strong>Enter the ID# of the toy:</strong><br><input type="text" name="tid" id="tid" value=""><br>
 <input type="radio" name="option"
@@ -308,21 +324,7 @@ value="sell">Sell<br>
 <input type="submit">
 </form>
 
-<form action="badFood.php"style= "border-top: 2px solid black; display:table; padding: 10px;">
-	<button><strong>Find Expired Food</strong></button>
-</form>
 
-<form action="Caretaker.php"style= "border-top: 2px solid black; display:table; padding: 10px;">
-	<button><strong>Hire A Caretaker</strong></button>
-</form>
-
-<form action = "ChangePrice.php"style= "border-top: 2px solid black; display:table; padding: 10px;">
-	<button><strong>Change Price of an Item</strong></button>
-</form>
-
-<form action="CountPets.php"style= "border-top: 2px solid black; display:table; padding: 10px;">
-	<button><strong>Count Pets</strong></button>
-</form>
 
 <!---------------Aaron's Stuff-------------------->
 
