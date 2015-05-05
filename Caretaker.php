@@ -33,5 +33,6 @@ Work Phone # (without spaces): <input type = "text" name = "WorkPhone" id ="Work
 
 ?>
 </body>
+<a href="goats.php">Back to Main Page</a>
 </html>
 
