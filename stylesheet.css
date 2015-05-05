@@ -12,29 +12,15 @@ body{
 h1{
 	color: #000;
 	font-style: normal;
-	font-size: 40px;
+	font-size: 34px;
 	font-family: Cambria;
 	text-align: left;
 	padding-top: 40px;
 	margin-right: -200px;
 }
 
-#search{
-	text-align: justify;
-	padding-top: 30px;
-	padding-left: 44px;
-	height: 180px;
-	width: 400px;
-	background-color: #fff;
-	position: fixed;
-	top: 200px;
-	right: 180px;
-	border-radius: 5px;
-	border-left-style: inset;
-	border-left-width: 5px;
-}
 #mainbackground{
-	width: 610px;
+	width: 620px;
 	height: 1000px;
 	background-color: #fff;
 	position: fixed;
