@@ -292,5 +292,9 @@
 
 ?>
 <html>
+	<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<div id = "mainbackground"></div>
+</head>
 <a href="goats.php">Back to Main Page</a>
 </html>
