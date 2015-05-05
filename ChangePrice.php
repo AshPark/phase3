@@ -1,7 +1,11 @@
 <html>
+	<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<div id = "mainbackground"></div>
+</head>
 <body>
 <a href="goats.php">Back to Main Page</a><br><br>
-Please fill out the following information to change the price of an item or pet in the database: <br><br>
+Please fill out the following information to change the price: <br><br>
 
 <form name = "changePrice" action="" method="post">
 ID: <input type="text" name="ID" id="ID"><br>
