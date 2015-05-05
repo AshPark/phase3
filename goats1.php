@@ -286,7 +286,7 @@
 		{
 			$PID = $_GET['pid'];
 			if(mysql_query("DELETE FROM pet WHERE pid='$PID'"))
-				echo "$PID had been adopted!";	
+				echo "$PID has been adopted!";	
 		}
 	}
 
