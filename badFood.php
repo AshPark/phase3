@@ -57,5 +57,7 @@ value="yes">Yes
 <?php if (isset($accept) && $accept=="no") echo "checked";?>
 value="no">No
 <input type="submit">
+<br><br>
+<a href="goats.php">Back to Main Page</a>
 </body>
 </html>
