@@ -1,4 +1,8 @@
 <html>
+	<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<div id = "mainbackground"></div>
+</head>
 <body>
 Please fill out the following information to add a new caretaker to the database: <br><br>
 
