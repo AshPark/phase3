@@ -1,7 +1,10 @@
 <html>
-<body>
+<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
 <h1>Welcome to Goats & Giggles!</h1>
-
+<body>
+<div id = "mainbackground"></div>
 <!-----Variable Declaration---------->
 <?php
 //Connect to Database
@@ -775,11 +778,6 @@ if($F12Supplier_Name_error == "")
 }	
 ?>
 </div>
-
-<!----End Function 12: StockShelves----->
-
-
-<!--------------End Aaron's Functions------------->
 
 </body>
 </html>
