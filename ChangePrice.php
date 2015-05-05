@@ -1,5 +1,6 @@
 <html>
 <body>
+<a href="goats.php">Back to Main Page</a><br><br>
 Please fill out the following information to change the price of an item or pet in the database: <br><br>
 
 <form name = "changePrice" action="" method="post">
