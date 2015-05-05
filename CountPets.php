@@ -1,5 +1,6 @@
 <html>
 <body>
+<a href="goats.php">Back to Main Page</a><br><br>
 Tally of all pets currently in the database, sorted by type: <br><br>
 
 <?php
