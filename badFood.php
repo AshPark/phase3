@@ -44,6 +44,7 @@
 
 <html>
 <body>
+<a href="goats.php">Back to Main Page</a><br>
 <form action="badFood.php" method="get">
 Would you like to delete this food?:<br><input type="radio" name="accept"
 <?php if (isset($accept) && $accept=="yes") echo "checked";?>

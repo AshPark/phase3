@@ -291,3 +291,6 @@
 	}
 
 ?>
+<html>
+<a href="goats.php">Back to Main Page</a>
+</html>
