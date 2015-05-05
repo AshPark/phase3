@@ -43,6 +43,10 @@
 ?>
 
 <html>
+	<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<div id = "mainbackground"></div>
+</head>
 <body>
 <a href="goats.php">Back to Main Page</a><br>
 <form action="badFood.php" method="get">
