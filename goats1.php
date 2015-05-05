@@ -31,15 +31,9 @@
 	
 	if((isset($_GET['tid']))and($_GET['tid']!="")and(isset($_GET['option'])))
 	{
-		if($_GET['option']=="price")
-		{
-			echo "The look up price of toy function goes here.";
-		}
-		else if($_GET['option']=="priceFix")
-		{
-			echo "The change price of a toy function goes here.";
-		}
-		else if($_GET['option']=="sell")
+		
+	
+		if($_GET['option']=="sell")
 		{
 			$TID = $_GET['tid'];
 			$sellToyquery = "SELECT TID, Quantity, Name, Price
@@ -128,15 +122,8 @@
 	
 	if((isset($_GET['fid']))and($_GET['fid']!="")and(isset($_GET['option1'])))
 	{
-		if($_GET['option1']=="price")
-		{
-			echo "The look up price of food function goes here.";
-		}
-		else if($_GET['option1']=="priceFix")
-		{
-			echo "The change price of a food function goes here.";
-		}
-		else if($_GET['option1']=="sell")
+		
+		if($_GET['option1']=="sell")
 		{
 			$FID = $_GET['fid'];
 			$sellFoodquery = "SELECT FID, Quantity, Name, Price
@@ -190,17 +177,13 @@
 			}
 
 		}
-		else if($_GET['option1']=="quantity")
-		{
-			echo "The change quantity of a food function goes here.";
-		}
 		else if($_GET['option1']=="supplier")
 		{
 			$FID = $_GET['fid'];
 
 			$sqlresult = "SELECT Name, Phone, Street, City, SuppState, Zip
     		 			  FROM `Supplier`, `SuppAddr`, `SuppFood`
-    					  WHERE FID = '$FID' AND `suppFood`.SuppName = `Supplier`.Name AND `suppFood`.SuppName = `SuppAddr`.SuppName ";
+    					  WHERE FID = '$FID' AND `SuppFood`.SuppName = `Supplier`.Name AND `SuppFood`.SuppName = `SuppAddr`.SuppName ";
 
     		$queryresult = mysql_query($sqlresult) or die(mysql_error());
 
@@ -226,11 +209,7 @@
 	
 	if((isset($_GET['pid']))and($_GET['pid']!="")and(isset($_GET['option2'])))
 	{
-		if($_GET['option2']=="price")
-		{
-			echo "Look up price of pet goes here.";
-		}
-		else if($_GET['option2']=="food")
+		if($_GET['option2']=="food")
 		{
 			$pid = $_GET['pid'];
 			echo "Favorite foods of PID: $pid";
@@ -252,10 +231,6 @@
 					echo"<td>$cell</td>";
 			}	
 			mysql_free_result($result1);
-		}
-		else if($_GET['option2']=="toy")
-		{
-			echo "The find favorite toy function goes here.";
 		}
 		else if($_GET['option2']=="care")
 		{
@@ -307,11 +282,6 @@
     		}
     		echo"</table>";
 		}
-
-		else if($_GET['option2']=="priceFix")
-		{
-			echo "The change price of pet function goes here.";
-		}
 		else if($_GET['option2']=="sell")
 		{
 			$PID = $_GET['pid'];
@@ -319,8 +289,5 @@
 				echo "$PID had been adopted!";	
 		}
 	}
-	if( isset($_GET['alg']))
-	{
-		echo "The allergen function goes here.";
-	}
+
 ?>
