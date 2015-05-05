@@ -177,9 +177,9 @@ insert into Bird values('BIRD000001', 0);
 
 insert into Bird values('BIRD000002', 1);
 
-insert into Mammal values('DOG000001', 'long', 0);
+insert into Mammal values('DOG0000001', 'long', 0);
 
-insert into Mammal values('CAT000002', 'short', 0);
+insert into Mammal values('CAT0000002', 'short', 0);
 
 insert into Fish values('FISH000001', 'Fresh');
 
@@ -278,7 +278,7 @@ insert into SuppToys values('Yay Toys', 'TOY0000008');
 
 insert into SuppToys values('Yay Toys', 'TOY0000009');
 
-insert into SuppToys values('Yay Toys', 'TOY00000010');
+insert into SuppToys values('Yay Toys', 'TOY0000001');
 
 insert into Pet_Allergens values('DOG0000001', 'Dandruff');
 
