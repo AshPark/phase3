@@ -1,6 +1,6 @@
 <html>
 <body>
-
+<h1>Welcome to Goats & Giggles!</h1>
 
 <!-----Variable Declaration---------->
 <?php
