@@ -40,5 +40,7 @@ Tally of all pets currently in the database, sorted by type: <br><br>
 
 	mysql_close();
 ?>
+<br><br>
+<a href="goats.php">Back to Main Page</a>
 </body>
 </html>
