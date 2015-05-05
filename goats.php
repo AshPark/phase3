@@ -595,10 +595,10 @@ echo "$F13Price_error";
 <!---End Error Message------>
 
 <form id="AddNewPet" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-Enter the NewID Number <input type="text" maxlength="10" name="F13ID" id="F13ID" value = ""><br>
-Enter the pets Price $<input type="number" min="0" step="0.01" name="F13Price" id="F13Price" value = ""><br>
-Enter the pets Lifetime(years) <input type="number" min="0" step="0.25" name="F13Lifetime" id="F13Lifetime" value = ""><br>
-Enter the pets Allergens <input type="text" name="F13Allergens" id="F13Allergens" value = ""><br>
+Enter the New ID Number <input type="text" maxlength="10" name="F13ID" id="F13ID" value = ""><br>
+Enter the pet's Price $<input type="number" min="0" step="0.01" name="F13Price" id="F13Price" value = ""><br>
+Enter the pet's Lifetime(years) <input type="number" min="0" step="0.25" name="F13Lifetime" id="F13Lifetime" value = ""><br>
+Enter the pet's Allergens <input type="text" name="F13Allergens" id="F13Allergens" value = ""><br>
 <input type="submit">
 </form>
 
