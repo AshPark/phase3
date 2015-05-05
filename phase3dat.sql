@@ -113,6 +113,8 @@ insert into Food values('FOOD000004', 20, 4.65, '2015-04-27', 10, 'Beggin Strips
 
 insert into Food values('FOOD000005', 15, 12.34, '2015-01-09', 10, 'Greenies');
 
+insert into Food values('FOOD000010', 4, 30.00, '2015-01-01', 3, 'Nummy Nummies');
+
 insert into Supplier values('Supply All the Pets', 5551111);
 
 insert into SuppAddr values('Supply All the Pets', 'Rainbow Rd.', 'Sunnyville', 'CA', '1234');
