@@ -254,7 +254,7 @@ function test_ID($data)
 <!---------End text cleaning function------------------------>
 
 
-<form action="goats1.php" method="get">
+<form action="goats1.php" method="get"style= "border-top: 2px solid black; display:table; padding: 10px;">
 What type of pet are you looking for: <select name="type">
   <option value="">Select...</option>
   <option value="Mammal">Mammal</option>
@@ -265,8 +265,8 @@ What type of pet are you looking for: <select name="type">
 <input type="submit">
 </form>
 
-<form action="goats1.php" method="get">
-Enter the ID# of the toy:<br><input type="text" name="tid" id="tid" value=""><br>
+<form action="goats1.php" method="get"style= "border-top: 2px solid black; display:table; padding: 10px;">
+<strong>Enter the ID# of the toy:</strong><br><input type="text" name="tid" id="tid" value=""><br>
 <input type="radio" name="option"
 <?php if (isset($option) && $option=="sell") echo "checked";?>
 value="sell">Sell <br>
@@ -278,8 +278,8 @@ value="supplier">Find supplier<br>
 <br>
 </form>
 
-<form action="goats1.php" method="get">
-Enter the ID# of the food:<br><input type="text" name="fid" id="fid" value=""><br>
+<form action="goats1.php" method="get"style= "border-top: 2px solid black; display:table; padding: 10px;">
+<strong>Enter the ID# of the food:</strong><br><input type="text" name="fid" id="fid" value=""><br>
 <input type="radio" name="option1"
 <?php if (isset($option1) && $option1=="sell") echo "checked";?>
 value="sell">Sell<br>
@@ -291,8 +291,8 @@ value="supplier">Find supplier<br>
 <br>
 </form>
 
-<form action="goats1.php" method="get">
-Enter the ID# of the pet:<br><input type="text" name="pid" id="pid" value=""><br>
+<form action="goats1.php" method="get"style= "border-top: 2px solid black; display:table; padding: 10px;">
+<strong>Enter the ID# of the pet:</strong><br><input type="text" name="pid" id="pid" value=""><br>
 <input type="radio" name="option2"
 <?php if (isset($option2) && $option2=="food") echo "checked";?>
 value="food">Find favorite food <br>
@@ -308,20 +308,20 @@ value="sell">Sell<br>
 <input type="submit">
 </form>
 
-<form action="badFood.php">
-	<button>Find Expired Food</button>
+<form action="badFood.php"style= "border-top: 2px solid black; display:table; padding: 10px;">
+	<button><strong>Find Expired Food</strong></button>
 </form>
 
-<form action="Caretaker.php">
-	<button>Hire A Caretaker</button>
+<form action="Caretaker.php"style= "border-top: 2px solid black; display:table; padding: 10px;">
+	<button><strong>Hire A Caretaker</strong></button>
 </form>
 
-<form action = "ChangePrice.php">
-	<button>Change Price of an Item</button>
+<form action = "ChangePrice.php"style= "border-top: 2px solid black; display:table; padding: 10px;">
+	<button><strong>Change Price of an Item</strong></button>
 </form>
 
-<form action="CountPets.php">
-	<button>Count Pets</button>
+<form action="CountPets.php"style= "border-top: 2px solid black; display:table; padding: 10px;">
+	<button><strong>Count Pets</strong></button>
 </form>
 
 <!---------------Aaron's Stuff-------------------->
